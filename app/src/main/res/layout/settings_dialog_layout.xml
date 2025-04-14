@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#333333"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sound_settings_title"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_start_sound"
+        android:textColor="@android:color/white"/>
+
+    <Spinner
+        android:id="@+id/startSoundSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/white"/>
+
+    <CheckBox
+        android:id="@+id/playFinishSoundCheckbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/play_finish_sound"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:minHeight="48dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/alert_volume"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"/>
+
+    <SeekBar
+        android:id="@+id/volumeSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"/>
+
+    <Button
+        android:id="@+id/saveChangesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_changes"
+        android:layout_marginTop="16dp"
+        android:minHeight="48dp"/>
+</LinearLayout>

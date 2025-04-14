@@ -1,0 +1,21 @@
+initscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+allprojects {
+    buildscript {
+        configurations.all {
+            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+                if (details.requested.group == 'org.jetbrains.kotlin') {
+                    details.useVersion '1.5.31'
+                }
+            }
+        }
+    }
+}
+
+gradle.startParameter.initScripts = gradle.startParameter.initScripts.findAll { 
+    !it.path.contains('ijMapper') 
+}

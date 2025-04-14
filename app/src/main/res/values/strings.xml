@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App & Buttons -->
+    <string name="app_name">StudyTimerApp</string>
+    <string name="start">START</string>
+    <string name="pause">PAUSE</string>
+    <string name="save_changes">Save changes</string>
+
+    <!-- Settings Dialog -->
+    <string name="sound_settings_title">Sound Settings</string>
+    <string name="select_start_sound">Select start sound:</string>
+    <string name="play_finish_sound">Play sound when timer finishes</string>
+    <string name="alert_volume">Alert volume:</string>
+
+    <!-- Tab Labels -->
+    <string name="pomodoro">Pomodoro</string>
+    <string name="short_break">Short Break</string>
+    <string name="long_break">Long Break</string>
+
+    <!-- Notifications -->
+    <string name="pomodoro_complete">Pomodoro Complete!</string>
+    <string name="short_break_over">Short Break Over!</string>
+    <string name="long_break_over">Long Break Over!</string>
+    <string name="timer_done">Timer Done!</string>
+    <string name="take_a_break">Take a break!</string>
+    <string name="time_to_focus">Time to focus!</string>
+
+    <!-- Descriptions for ImageButtons and ImageView -->
+    <string name="bg_desc">Background image</string>
+    <string name="reset_timer">Reset the timer</string>
+    <string name="open_settings">Open settings</string>
+    <string name="toggle_sound">Toggle sound on/off</string>
+    <string name="default_timer">15:00</string>
+
+
+    <!-- Permissions -->
+    <string name="post_notifications_rationale">This app uses notifications to alert you when a timer ends.</string>
+</resources>

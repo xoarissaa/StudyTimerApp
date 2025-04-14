@@ -1,0 +1,8 @@
+gradle.startParameter.setInitScripts(gradle.startParameter.getInitScripts().findAll { !it.name.contains('ijMapper') })
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
