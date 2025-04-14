@@ -32,6 +32,7 @@
     <string name="toggle_sound">Toggle sound on/off</string>
     <string name="default_timer">15:00</string>
 
+    <string name="change_background">Change Background</string>
 
     <!-- Permissions -->
     <string name="post_notifications_rationale">This app uses notifications to alert you when a timer ends.</string>

@@ -3,9 +3,13 @@ package com.example.studytimerapp
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.*
 import android.widget.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.google.android.material.tabs.TabLayout
@@ -17,7 +21,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var settingsButton: ImageButton
     private lateinit var soundButton: ImageButton
     private lateinit var timerTabs: TabLayout
+    private lateinit var backgroundPickerButton: ImageButton
     private var mediaPlayer: MediaPlayer? = null
+
+    private lateinit var backgroundPicker: ActivityResultLauncher<Intent>
 
     private var countDownTimer: CountDownTimer? = null
     private var timeLeftInMillis: Long = 25 * 60 * 1000
@@ -44,11 +51,41 @@ class MainActivity : AppCompatActivity() {
         settingsButton = findViewById(R.id.settingsButton)
         soundButton = findViewById(R.id.soundButton)
         timerTabs = findViewById(R.id.timerTabs)
+        backgroundPickerButton = findViewById(R.id.bgPickerButton)
+
+        setupBackgroundPicker()
+        loadBackgroundImage()
 
         updateTimerDisplay()
         setupListeners()
         createNotificationChannel()
         loadSoundSettings()
+    }
+
+    private fun setupBackgroundPicker() {
+        backgroundPicker = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val imageUri = result.data?.data
+                imageUri?.let {
+                    findViewById<ImageView>(R.id.imageView2).setImageURI(it)
+                    getSharedPreferences("UserPrefs", MODE_PRIVATE).edit().putString("bg_uri", it.toString()).apply()
+                }
+            }
+        }
+
+        backgroundPickerButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            backgroundPicker.launch(intent)
+        }
+    }
+
+    private fun loadBackgroundImage() {
+        val uriStr = getSharedPreferences("UserPrefs", MODE_PRIVATE).getString("bg_uri", null)
+        uriStr?.let {
+            val imageUri = Uri.parse(it)
+            findViewById<ImageView>(R.id.imageView2).setImageURI(imageUri)
+        }
     }
 
     private fun setupListeners() {
@@ -174,12 +211,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun showTimerCompletionNotification() {
         val title = when (timerTabs.selectedTabPosition) {
-            0 -> "Pomodoro Complete!"
-            1 -> "Short Break Over!"
-            2 -> "Long Break Over!"
-            else -> "Timer Done!"
+            0 -> getString(R.string.pomodoro_complete)
+            1 -> getString(R.string.short_break_over)
+            2 -> getString(R.string.long_break_over)
+            else -> getString(R.string.timer_done)
         }
-        val message = if (timerTabs.selectedTabPosition == 0) "Take a break!" else "Time to focus!"
+        val message = if (timerTabs.selectedTabPosition == 0)
+            getString(R.string.take_a_break) else getString(R.string.time_to_focus)
 
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_reset)
